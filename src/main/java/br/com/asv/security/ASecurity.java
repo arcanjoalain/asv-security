@@ -16,7 +16,7 @@ import br.com.asv.security.jwt.JWTokenService;
 
 @Configuration
 @EnableWebSecurity
-public class Security extends WebSecurityConfigurerAdapter {
+public abstract class ASecurity extends WebSecurityConfigurerAdapter {
 	
 	 @Autowired
 	    private ISecurityBo userDetailService;
@@ -28,7 +28,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     private IAuthenticationProvider authProvider;
 
     private static final String[] PUBLIC_MATCHERS = {
-    		"/*",
+    		//"/*",
     		"/public/**",
             "/security/**",
             "/swagger-ui/**", 
