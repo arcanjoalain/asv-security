@@ -9,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 import org.springframework.security.core.GrantedAuthority;
 
 import br.com.asv.model.entities.ABaseEntity;
+import br.com.asv.model.enums.StatusEntityEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -44,7 +45,7 @@ public abstract class EntitySecurity extends ABaseEntity implements IEntitySecur
 
 	@Override
 	public boolean isEnabled() {
-		return enabled;
+		return getStatusEntity()==StatusEntityEnum.ENABLED;
 	}
 	
 	@Override

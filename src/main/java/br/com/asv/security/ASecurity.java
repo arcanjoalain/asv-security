@@ -18,8 +18,8 @@ import br.com.asv.security.jwt.JWTokenService;
 @EnableWebSecurity
 public abstract class ASecurity extends WebSecurityConfigurerAdapter {
 	
-	 @Autowired
-	    private ISecurityBo userDetailService;
+	@Autowired
+	private ISecurityBo userDetailService;
 
     @Autowired
     private JWTokenService jwtUtil;
@@ -28,7 +28,7 @@ public abstract class ASecurity extends WebSecurityConfigurerAdapter {
     private IAuthenticationProvider authProvider;
 
     private static final String[] PUBLIC_MATCHERS = {
-    		//"/*",
+//    		"/**",
     		"/public/**",
             "/security/**",
             "/swagger-ui/**", 
