@@ -11,12 +11,12 @@
 	</parent>
 	<groupId>br.com.asv</groupId>
 	<artifactId>asvsecurity</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.6</version>
 	<name>asvsecurity</name>
 	<description>Projet of security</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>14</java.version>
 	</properties>
 
 	<dependencies>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>br.com.asv</groupId>
 			<artifactId>asvmodels</artifactId>
-			<version>0.0.4</version>
+			<version>0.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -90,13 +90,18 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
-	
+
 	<distributionManagement>
-		<repository>
+	 	<repository>
 			<id>itn-nexus-releases</id>
 			<name>Nexus Repository</name>
 			<url>http://nexus.institutoitn.com.br/repository/maven-releases/</url>
-		</repository>
+		</repository> 
+	<!--	<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/arcanjoalain/asvsecurity</url>
+		</repository> -->
 	</distributionManagement>
 
 </project>

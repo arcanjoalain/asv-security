@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.asv.security.models.IEntitySecurity;
+import br.com.asv.security.models.JWTokenResult;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -45,6 +46,21 @@ public class JWTokenService {
                 .signWith( SignatureAlgorithm.HS512, properties.getSecret().getBytes())
                 .compact();
     }
+    
+    public JWTokenResult generateTokenObj(IEntitySecurity user) {
+    	JWTokenResult jwTokenResult =new JWTokenResult();
+        Claims claims = Jwts.claims().setSubject(user.getUsername()).setId(user.getId().toString());
+        claims.put("username", user.getUsername());
+//        claims.put("profile", user.getProfile().getRules().stream().map(Rules::toString).collect(Collectors.toList()));
+        jwTokenResult.setDateExpire(new Date(System.currentTimeMillis() + (properties.getExpiresIn() * 60000)));
+        jwTokenResult.setToken(Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(jwTokenResult.getDateExpire())
+                .signWith( SignatureAlgorithm.HS512, properties.getSecret().getBytes())
+                .compact());
+        
+        return jwTokenResult;
+    }
 
     public String generateTokenSenhaTemporaria(IEntitySecurity user) {
         Claims claims = Jwts.claims().setSubject(user.getUsername()).setId(user.getId().toString());
@@ -55,6 +71,20 @@ public class JWTokenService {
                 .setExpiration(new Date(System.currentTimeMillis() + (properties.getExpirationSenhaTemporaria() * 60000)))
                 .signWith( SignatureAlgorithm.HS512, properties.getSecret().getBytes())
                 .compact();
+    }
+    
+    public JWTokenResult generateTokenSenhaTemporariaObj(IEntitySecurity user) {
+    	JWTokenResult jwTokenResult =new JWTokenResult();
+        Claims claims = Jwts.claims().setSubject(user.getUsername()).setId(user.getId().toString());
+        claims.put("username", user.getUsername());
+//        claims.put("authorities", user.getProfile().getRules().stream().map(Rules::toString).collect(Collectors.toList()));
+        jwTokenResult.setDateExpire(new Date(System.currentTimeMillis() + (properties.getExpirationSenhaTemporaria() * 60000)));
+        jwTokenResult.setToken(Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(jwTokenResult.getDateExpire())
+                .signWith( SignatureAlgorithm.HS512, properties.getSecret().getBytes())
+                .compact());
+        return jwTokenResult;
     }
     
     public String generateTokenDevice(IEntitySecurity dto) {
