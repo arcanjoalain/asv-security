@@ -17,13 +17,13 @@ import br.com.asv.security.bo.ISecurityBo;
 import br.com.asv.security.jwt.JWTokenService;
 import br.com.asv.security.models.IEntitySecurity;
 
-public class JWTAuthorizationFilter<E extends IEntitySecurity> extends BasicAuthenticationFilter {
+public class JWTAuthorizationFilter<E extends IEntitySecurity<I>,I> extends BasicAuthenticationFilter {
 	
-	private JWTokenService jwtUtil;
+	private JWTokenService<I> jwtUtil;
 	
 	private ISecurityBo userDetailService;
 
-	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTokenService jwtUtil, ISecurityBo userDetailService) {
+	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTokenService<I> jwtUtil, ISecurityBo userDetailService) {
 		super(authenticationManager);
 		this.jwtUtil = jwtUtil;
 		this.userDetailService = userDetailService;

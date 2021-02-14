@@ -2,13 +2,15 @@ package br.com.asv.security.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.NoRepositoryBean;
-
-import br.com.asv.model.repositories.IBaseRepository;
+//import org.springframework.data.repository.NoRepositoryBean;
+//
+//import br.com.asv.model.repositories.IBaseRepository;
 import br.com.asv.security.models.IEntitySecurity;
 
-@NoRepositoryBean
-public interface IEntitySecurityRepository<E extends IEntitySecurity> extends IBaseRepository<E>{
+//@NoRepositoryBean
+public interface IEntitySecurityRepository<E extends IEntitySecurity<I>,I> 
+//extends IBaseRepository<E,I>
+{
 
 //	Optional<E> findByIdOrderByProfileProfileRulesId(Long id);
 	E findByUsername(String username);

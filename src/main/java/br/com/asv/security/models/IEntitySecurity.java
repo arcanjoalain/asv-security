@@ -4,9 +4,14 @@ import java.util.Date;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.asv.model.entities.IBaseEntity;
+import br.com.asv.model.enums.StatusEntityEnum;
 
-public interface IEntitySecurity extends UserDetails,IBaseEntity {
+
+public interface IEntitySecurity<I> extends UserDetails {
+	
+	StatusEntityEnum getStatusEntity(); 
+	
+	I getPid();
 
 	String getPasswordTemp();
 

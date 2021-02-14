@@ -10,10 +10,10 @@ import br.com.asv.security.repository.IEntitySecurityRepository;
 import lombok.Data;
 
 @Data
-public abstract class ASecurityBo<E extends IEntitySecurity> implements ISecurityBo {
+public abstract class ASecurityBo<E extends IEntitySecurity<I>,I> implements ISecurityBo {
 
 	
-	private IEntitySecurityRepository<E> iUserRepository;
+	private IEntitySecurityRepository<E,I> iUserRepository;
 
 //	@Autowired
 //	private IPasswordRecoverRepository passwordRecoveryRepository;
@@ -31,7 +31,7 @@ public abstract class ASecurityBo<E extends IEntitySecurity> implements ISecurit
 		
 	}
 	
-	public ASecurityBo(IEntitySecurityRepository<E> iUserRepository) {
+	public ASecurityBo(IEntitySecurityRepository<E,I> iUserRepository) {
 		this.iUserRepository = iUserRepository;
 	}
 

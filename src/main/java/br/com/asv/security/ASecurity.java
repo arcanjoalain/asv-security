@@ -16,13 +16,13 @@ import br.com.asv.security.jwt.JWTokenService;
 
 @Configuration
 @EnableWebSecurity
-public abstract class ASecurity extends WebSecurityConfigurerAdapter {
+public abstract class ASecurity<I> extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private ISecurityBo userDetailService;
 
     @Autowired
-    private JWTokenService jwtUtil;
+    private JWTokenService<I> jwtUtil;
 
     @Autowired
     private IAuthenticationProvider authProvider;

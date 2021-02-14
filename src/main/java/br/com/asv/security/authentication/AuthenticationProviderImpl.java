@@ -20,16 +20,16 @@ import br.com.asv.security.jwt.JWTokenService;
 import br.com.asv.security.models.IEntitySecurity;
 
 @Component
-public class AuthenticationProviderImpl<E extends IEntitySecurity> implements IAuthenticationProvider {
+public class AuthenticationProviderImpl<E extends IEntitySecurity<I>,I> implements IAuthenticationProvider {
 
 	@Autowired
-	private ASecurityBo<E> service;
+	private ASecurityBo<E,I> service;
 
 	@Autowired
 	private BCryptPasswordEncoder crypt;
 
 	@Autowired
-	private JWTokenService jwtUtil;
+	private JWTokenService<I> jwtUtil;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException, AuthorizationException {
@@ -41,12 +41,13 @@ public class AuthenticationProviderImpl<E extends IEntitySecurity> implements IA
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	private Authentication login(Authentication authentication) {
 		String username = authentication.getName();
 		String password = authentication.getCredentials().toString();
 
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-		IEntitySecurity user =  (IEntitySecurity) service.loadUserByUsername(username);
+		IEntitySecurity<I> user =  (IEntitySecurity<I>) service.loadUserByUsername(username);
 		
 		if (user == null) {
 			throw new UsernameNotFoundException("login.not.found");

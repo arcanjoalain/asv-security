@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
+//import javax.persistence.MappedSuperclass;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import br.com.asv.model.entities.ABaseEntity;
 import br.com.asv.model.enums.StatusEntityEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-@MappedSuperclass
-public abstract class EntitySecurity extends ABaseEntity implements IEntitySecurity{
+//@EqualsAndHashCode(callSuper = true)
+//@MappedSuperclass
+public abstract class EntitySecurity<I> implements IEntitySecurity<I>{
 
 	
 	private static final long serialVersionUID = 1L;
