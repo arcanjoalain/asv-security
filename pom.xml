@@ -4,14 +4,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.3</version>
+		<groupId>br.com.asv</groupId>
+		<artifactId>asvbase</artifactId>
+		<version>0.1.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.asv</groupId>
 	<artifactId>asvsecurity</artifactId>
-	<version>0.1.6</version>
+	<version>0.1.7</version>
 	<name>asvsecurity</name>
 	<description>Project security</description>
 	<properties>
@@ -22,7 +21,7 @@
 		<dependency>
 			<groupId>br.com.asv</groupId>
 			<artifactId>asvclient</artifactId>
-			<version>0.1.5</version>
+			<version>0.1.9</version>
 		</dependency>
 
 		<dependency>
@@ -53,29 +52,6 @@
 			<version>0.9.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -83,12 +59,5 @@
 		</dependency>
 	</dependencies>
 
-	<distributionManagement>
-		<repository>
-			<id>itn-nexus-releases</id>
-			<name>Nexus Repository</name>
-			<url>https://nexus.institutoitn.com.br/repository/maven-releases/</url>
-		</repository>
-	</distributionManagement>
 
 </project>
