@@ -1,9 +1,9 @@
-package br.com.asv.asvmssecurity.controller;
+package br.com.asv.security.controller;
 
 import java.util.List;
 
-import br.com.asv.asvmssecurity.dto.IApplicationUser;
-import br.com.asv.asvmssecurity.filter.AJWTAuthenticationFilter;
+import br.com.asv.security.dto.IApplicationUser;
+import br.com.asv.security.filter.AJWTAuthenticationFilter;
 
 public interface IBaseSecurityConfig< E extends IApplicationUser<I>,F extends AJWTAuthenticationFilter<E,I>,I> {
 	

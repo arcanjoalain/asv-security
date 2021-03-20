@@ -5,17 +5,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>br.com.asv</groupId>
-		<artifactId>asvbase</artifactId>
-		<version>0.1.1</version>
+		<artifactId>parent</artifactId>
+		<version>0.1.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<artifactId>asvsecurity</artifactId>
-	<version>0.1.7</version>
-	<name>asvsecurity</name>
+	<artifactId>security</artifactId>
+	<version>0.1.10</version>
+	<name>asv-security</name>
 	<description>Project security</description>
-	<properties>
-		<java.version>14</java.version>
-	</properties>
+	
 	<dependencies>
 
 		<dependency>

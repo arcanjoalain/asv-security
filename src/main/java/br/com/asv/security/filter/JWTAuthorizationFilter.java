@@ -1,4 +1,4 @@
-package br.com.asv.asvmssecurity.filter;
+package br.com.asv.security.filter;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
-import br.com.asv.asvmssecurity.constant.SecurityConstants;
+import br.com.asv.security.constant.SecurityConstants;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 

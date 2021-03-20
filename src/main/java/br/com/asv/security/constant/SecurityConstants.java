@@ -1,4 +1,4 @@
-package br.com.asv.asvmssecurity.constant;
+package br.com.asv.security.constant;
 
 
 import lombok.Getter;

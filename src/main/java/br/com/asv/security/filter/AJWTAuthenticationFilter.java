@@ -1,4 +1,4 @@
-package br.com.asv.asvmssecurity.filter;
+package br.com.asv.security.filter;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
@@ -22,8 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.asv.asvmssecurity.constant.SecurityConstants;
-import br.com.asv.asvmssecurity.dto.IApplicationUser;
+import br.com.asv.security.constant.SecurityConstants;
+import br.com.asv.security.dto.IApplicationUser;
 
 public abstract class AJWTAuthenticationFilter<
 		E extends IApplicationUser<I>,I> extends UsernamePasswordAuthenticationFilter {
@@ -69,5 +69,7 @@ public abstract class AJWTAuthenticationFilter<
                 .withExpiresAt(new Date(System.currentTimeMillis() + securityConstants.getExpirationTime()))
                 .sign(HMAC512(securityConstants.getSecret().getBytes(StandardCharsets.UTF_8)));
         res.addHeader(securityConstants.getHeaderString(), securityConstants.getTokenPrefix() + token);
+        String json = securityConstants.getHeaderString()+ securityConstants.getTokenPrefix() + token;
+        res.getWriter().write(json);
     }
 }

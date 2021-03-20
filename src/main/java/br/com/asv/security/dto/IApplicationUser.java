@@ -1,4 +1,4 @@
-package br.com.asv.asvmssecurity.dto;
+package br.com.asv.security.dto;
 
 public interface IApplicationUser<I> {
 	

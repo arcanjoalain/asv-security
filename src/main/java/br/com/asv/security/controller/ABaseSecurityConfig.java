@@ -1,4 +1,4 @@
-package br.com.asv.asvmssecurity.controller;
+package br.com.asv.security.controller;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,10 +18,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import br.com.asv.asvmssecurity.constant.SecurityConstants;
-import br.com.asv.asvmssecurity.dto.IApplicationUser;
-import br.com.asv.asvmssecurity.filter.AJWTAuthenticationFilter;
-import br.com.asv.asvmssecurity.filter.JWTAuthorizationFilter;
+import br.com.asv.security.constant.SecurityConstants;
+import br.com.asv.security.dto.IApplicationUser;
+import br.com.asv.security.filter.AJWTAuthenticationFilter;
+import br.com.asv.security.filter.JWTAuthorizationFilter;
 import lombok.Getter;
 
 public abstract class ABaseSecurityConfig<
