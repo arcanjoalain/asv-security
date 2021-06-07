@@ -42,7 +42,7 @@ public abstract class AJWTAuthenticationFilter<
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-			E creds = (E) new ObjectMapper()
+			E creds = new ObjectMapper()
                     .readValue(req.getInputStream(), getClassUser());
 
             return authenticationManager.authenticate(
@@ -69,7 +69,8 @@ public abstract class AJWTAuthenticationFilter<
                 .withExpiresAt(new Date(System.currentTimeMillis() + securityConstants.getExpirationTime()))
                 .sign(HMAC512(securityConstants.getSecret().getBytes(StandardCharsets.UTF_8)));
         res.addHeader(securityConstants.getHeaderString(), securityConstants.getTokenPrefix() + token);
-        String json = securityConstants.getHeaderString()+ securityConstants.getTokenPrefix() + token;
-        res.getWriter().write(json);
+        res.getWriter().write(prepareResult(token));
     }
+	
+	public abstract String prepareResult(String token);
 }

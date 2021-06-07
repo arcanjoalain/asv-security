@@ -2,13 +2,13 @@ package br.com.asv.security.dto;
 
 public interface IApplicationUser<I> {
 	
-	public I getPid() ;
+	I getPid() ;
 
-    public String getUsername();
+    String getUsername();
 
-    public void setUsername(String username) ;
+    void setUsername(String username) ;
 
-    public String getPassword() ;
+    String getPassword() ;
 
-    public void setPassword(String password);
+    void setPassword(String password);
 }

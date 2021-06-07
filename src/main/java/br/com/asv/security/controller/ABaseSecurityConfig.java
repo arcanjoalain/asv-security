@@ -3,7 +3,6 @@ package br.com.asv.security.controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,9 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.com.asv.security.constant.SecurityConstants;
 import br.com.asv.security.dto.IApplicationUser;
@@ -31,8 +27,7 @@ public abstract class ABaseSecurityConfig<
     private IBaseUserDetailService<I> userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
-//    private F filterAuth;
-//    private JWTAuthenticationFilter<I> filterAuth = new JWTAuthenticationFilter<I>(authenticationManager());
+    private String urlPublic = "/ws/login/**";
     
     @Getter
     private SecurityConstants securityConstants;
@@ -41,13 +36,15 @@ public abstract class ABaseSecurityConfig<
         this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         initialize();
+        this.securityConstants.setLoginUrl(this.urlPublic);
     }
     
     public ABaseSecurityConfig(IBaseUserDetailService<I> userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder, String urlPublic) {
     	this.userDetailsService = userDetailsService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         initialize();
-        this.securityConstants.setLoginUrl(urlPublic);
+        this.urlPublic = urlPublic;
+        this.securityConstants.setLoginUrl(this.urlPublic);
     }
     
     private void initialize() {
@@ -56,8 +53,8 @@ public abstract class ABaseSecurityConfig<
     
     private RequestMatcher prepareRquestPublic() {
   	  List<RequestMatcher> publicUrl = new LinkedList<>();
-  	  for (String urlPublic : getPublicUrls()) {
-  		  publicUrl.add(new AntPathRequestMatcher(urlPublic));
+  	  for (String urlPublicInt : getPublicUrls()) {
+  		  publicUrl.add(new AntPathRequestMatcher(urlPublicInt));
   	 }
   	  return new OrRequestMatcher(publicUrl);
     }
@@ -67,6 +64,8 @@ public abstract class ABaseSecurityConfig<
       web.ignoring().requestMatchers(prepareRquestPublic());
       web.ignoring()
   	.antMatchers(HttpMethod.OPTIONS)
+//  	.antMatchers(HttpMethod.OPTIONS, this.urlPublic)
+//  	.antMatchers(HttpMethod.POST, this.urlPublic)
   	.antMatchers(HttpMethod.POST, "/auth/**")
   	.antMatchers(HttpMethod.GET, "/ws/file/**")
   	.antMatchers("/ws/translate/**")
@@ -77,10 +76,11 @@ public abstract class ABaseSecurityConfig<
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	F filterAuth = createFilterAuth();
-    	filterAuth.setFilterProcessesUrl(this.securityConstants.getLoginUrl());
+    	filterAuth.setFilterProcessesUrl(this.urlPublic);
     	
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(this.securityConstants.getLoginUrl()).permitAll()
+        		.antMatchers(HttpMethod.OPTIONS,this.urlPublic).permitAll()
+                .antMatchers(this.urlPublic).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(filterAuth)
@@ -93,11 +93,6 @@ public abstract class ABaseSecurityConfig<
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
+    
 
-  @Bean
-  CorsConfigurationSource corsConfigurationSource() {
-    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-    return source;
-  }
 }
