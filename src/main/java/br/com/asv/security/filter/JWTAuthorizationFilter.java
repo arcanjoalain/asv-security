@@ -45,6 +45,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+    	UsernamePasswordAuthenticationToken result = null;
         String token = request.getHeader(securityConstants.getHeaderString());
         if (token != null) {
             // parse the token.
@@ -54,10 +55,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .getSubject();
 
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            	result =  new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
-            return null;
         }
-        return null;
+        return result;
     }
 }

@@ -12,6 +12,6 @@ public class SecurityConstants {
     private Long expirationTime = (long) 864_000_000; // 10 days
     private String tokenPrefix = "Bearer ";
     private String headerString = "Authorization";
-    private String loginUrl = "/ws/login/**";
+    private String loginUrl = "/spr/login";
     
 }

@@ -26,7 +26,7 @@ import br.com.asv.security.constant.SecurityConstants;
 import br.com.asv.security.dto.IApplicationUser;
 
 public abstract class AJWTAuthenticationFilter<
-		E extends IApplicationUser<I>,I> extends UsernamePasswordAuthenticationFilter {
+		E extends IApplicationUser<I>,I> extends UsernamePasswordAuthenticationFilter  implements IJWTAuthenticationFilter{
 	
 	private SecurityConstants securityConstants  = new SecurityConstants();
 	
@@ -63,14 +63,14 @@ public abstract class AJWTAuthenticationFilter<
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-
         String token = JWT.create()
                 .withSubject(( (User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + securityConstants.getExpirationTime()))
                 .sign(HMAC512(securityConstants.getSecret().getBytes(StandardCharsets.UTF_8)));
         res.addHeader(securityConstants.getHeaderString(), securityConstants.getTokenPrefix() + token);
-        res.getWriter().write(prepareResult(token));
+        res.getWriter().write(prepareResult(token, auth));
     }
 	
-	public abstract String prepareResult(String token);
+	
+	
 }
