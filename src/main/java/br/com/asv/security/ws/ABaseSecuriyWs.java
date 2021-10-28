@@ -31,14 +31,12 @@ public abstract class ABaseSecuriyWs<
 		IApplicationUser<I> result = controller.findToLogin(loginRequest);
 		
 		if(result!=null) {
-			System.out.println("$$$$$$$$$$$$$$$$$$$11");	
 			Authentication auth= authService.createAutheticate(getAuthManager(), loginRequest);
 	        String token = authService.createToken(auth);
 	        HttpHeaders httpHeaders = new HttpHeaders();
 	        httpHeaders.set(authService.getSecurityConstants().getHeaderString(), token);
 	        return new ResponseEntity<String>(controller.prepareResult(token, auth),httpHeaders,HttpStatus.OK);
 		}else {
-			System.out.println("$$$$$$$$$$$$$$$$$$$22");	
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		

@@ -18,7 +18,6 @@ public abstract class ABaseUserDetailService<I, U extends User> implements IBase
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		System.out.println("Load");
 		IApplicationUser<I> applicationUser = findByUsername(username);
         if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
