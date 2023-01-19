@@ -6,16 +6,16 @@
 	<parent>
 		<groupId>br.com.asv</groupId>
 		<artifactId>parent</artifactId>
-		<version>0.1.13</version>
+		<version>0.2.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<artifactId>security</artifactId>
-	<version>0.1.33</version>
+	<version>0.2.01</version>
 	<name>asv-security</name>
 	<description>Project security</description>
 
 	<properties>
-		<asv.base.version>0.1.27</asv.base.version>
+		<asv.base.version>0.2.01</asv.base.version>
 	</properties>
 	
 	<dependencies>
@@ -39,12 +39,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<version>2.11.0</version>
 		</dependency>
 
 		<dependency>
